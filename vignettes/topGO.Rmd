@@ -61,23 +61,20 @@ options(stringsAsFactors = FALSE)
 
 # Introduction
 
-The `topGO` package is designed to facilitate semi-automated enrichment analysis for Gene Ontology (GO) terms. 
-The process consists of input of normalised gene expression measurements, gene-wise correlation or differential 
-expression analysis, enrichment analysis of GO terms, interpretation and visualisation of the results.
+The `r BiocStyle::Biocpkg("topGO")` package is designed to facilitate semi-automated enrichment analysis for Gene Ontology (GO) terms. 
+The process consists of input of normalised gene expression measurements, gene-wise correlation or differential expression analysis, enrichment analysis of GO terms, interpretation and visualisation of the results.
 
-One of the main advantages of `topGO` is the unified gene set testing framework it offers.
-Besides providing an easy to use set of functions for performing GO enrichment analysis, it
-also enables the user to easily implement new statistical tests or new algorithms that deal with
-the GO graph structure. This unified framework also facilitates the comparison between different
-GO enrichment methodologies. 
+One of the main advantages of `r BiocStyle::Biocpkg("topGO")` is the unified gene set testing framework it offers.
+Besides providing an easy to use set of functions for performing GO enrichment analysis, it also enables the user to easily implement new statistical tests or new algorithms that deal with
+the GO graph structure. 
+This unified framework also facilitates the comparison between different GO enrichment methodologies. 
 
-% The package provides a set of classes and methods for performing enrichment analysis
-% of Gene Ontology categories. The user can also use the available framework in order to
-% develop and test new enrichment methods that make use of the GO graph structure.
+<!-- The package provides a set of classes and methods for performing enrichment analysis of Gene Ontology categories.  -->
+<!-- The user can also use the available framework in order to develop and test new enrichment methods that make use of the GO graph structure. -->
 
 There are a number of test statistics and algorithms dealing with the GO graph structured 
-ready to use in {\tt topGO}. Table~\@ref(tabletopGO) presents the compatibility table between 
-the test statistics and GO graph methods.
+ready to use in `r BiocStyle::Biocpkg("topGO")`. 
+Table~\@ref(tabletopGO) presents the compatibility table between the test statistics and GO graph methods.
 
 
 ```{r echo = FALSE}
@@ -88,6 +85,8 @@ noPic <- "\\includegraphics[width=3mm]{red_ckmark.png}"
 x[x == 1] <-  yesPic
 x[x == "0"] <-  noPic
 ``` 
+
+TODOTODO
 
 \begin{table}[!ht]
   \centering\resizebox{.5\linewidth}{!}{%
@@ -102,68 +101,56 @@ if(require(xtable))
 {#tabletopGO}
 \end{table}
 
-The {\sf elim} and {\sf weight} algorithms were introduced in~@Alexa2006. The default algorithm
-used by the `topGO` package is a mixture between the {\sf elim} and the {\sf weight} algorithms and
-it will be referred as {\sf weight01}. The {\sf parentChild} algorithm was introduced by~@Grossmann2007.
+The `elim` and `weight algorithms were introduced in [@Alexa2006]. The default algorithm
+used by the `r BiocStyle::Biocpkg("topGO")` package is a mixture between the `elim` and the `weight` algorithms and it will be referred as `weight01`. 
+The `parentChild` algorithm was introduced by [@Grossmann2007].
 
-We assume the user has a good understanding of GO, see~@GOC01, and is familiar with gene set enrichment 
-tests. Also this document requires basic knowledge of R language.
+We assume the user has a good understanding of GO, see [@GOC01], and is familiar with gene set enrichment tests. 
+Also this document requires basic knowledge of R language.
 
-The next section presents a quick tour into `topGO` and is thought to be independent of the rest
-of this manuscript. The remaining sections provide details on the functions used in the sample
-section as well as showing more advance functionality implemented in the `topGO` package.
+The next section presents a quick tour into `r BiocStyle::Biocpkg("topGO")` and is thought to be independent of the rest of this manuscript. 
+The remaining sections provide details on the functions used in the sample section as well as showing more advanced functionality implemented in the `r BiocStyle::Biocpkg("topGO")` package.
 
 # Installation
 
-This section briefly describe the necessary to get `topGO` running on your system. 
-We assume that the user have the R program (see the R project at http://www.r-project.org) already
-installed and its familiar with it. You will need to have R 2.10.0 or later to be able to install and
-run {\tt topGO}.
+This section briefly describe the necessary to get `r BiocStyle::Biocpkg("topGO")` running on your system. 
+We assume that the user have the R program (see the R project at http://www.r-project.org) already installed and its familiar with it. 
+You will need to have R 2.10.0 or later to be able to install and run `r BiocStyle::Biocpkg("topGO")`.
 
-The `topGO` package is available from the Bioconductor repository at http://www.bioconductor.org
-To be able to install the package one needs first to install the core Bioconductor packages. 
+The `r BiocStyle::Biocpkg("topGO")` package is available from the Bioconductor repository at http://www.bioconductor.org.
+To be able to install the package one needs first to install the core Bioconductor packages (via the `r BiocStyle::CRANpkg("BiocManager")`). 
 If you have already installed Bioconductor packages on your system then you can skip the two lines 
 below.
 
 ```{r eval = FALSE}
-source("http://bioconductor.org/biocLite.R")
-biocLite()
+install.packages("BiocManager")
+BiocManager::install()
 ``` 
 
-Once the core Bioconductor packages are installed, we can install the `topGO` package by
+Once the core Bioconductor packages are installed, we can install the `r BiocStyle::Biocpkg("topGO")` package by
 
 ```{r eval = FALSE}
-source("http://bioconductor.org/biocLite.R")
-biocLite("topGO")
+BiocManager::install("topGO")
 ``` 
 
-\clearpage
 
-# Quick start guide
-{#sampleSession}
+# Quick start guide {#sampleSession}
 
-This section describes a simple working session using {\tt topGO}. There are only a handful of commands
-necessary to perform a gene set enrichment analysis which will be briefly presented below.
+This section describes a simple working session using `r BiocStyle::Biocpkg("topGO")`. 
+There are only a handful of commands necessary to perform a gene set enrichment analysis which will be briefly presented below.
 
 A typical session can be divided into three steps:
-\begin{enumerate}
--  {\it Data preparation:} List of genes identifiers, gene scores, list of differentially expressed genes
-  or a criteria for selecting genes based on their scores, as well as gene-to-GO annotations are all collected
-  and stored in a single `R` object.
-  
--  {\it Running the enrichment tests:} Using the object created in the first step the user can perform
-  enrichment analysis using any feasible mixture of statistical tests and methods that deal with the GO topology.
-  
--  {\it Analysis of the results:} The results obtained in the second step are analysed using 
-  summary functions and visualisation tools.
-\end{enumerate}
 
-Before going through each of those steps the user needs to decide which biological question he would
-like to investigate. The aim of the study, as well as the nature of the available data, will dictate which test 
-statistic/methods need to used. 
+- *Data preparation:* List of genes identifiers, gene scores, list of differentially expressed genes or a criteria for selecting genes based on their scores, as well as gene-to-GO annotations are all collected and stored in a single `R` object.
+  
+- *Running the enrichment tests:* Using the object created in the first step the user can perform enrichment analysis using any feasible mixture of statistical tests and methods that deal with the GO topology.
+  
+- *Analysis of the results:* The results obtained in the second step are analysed using summary functions and visualisation tools.
 
-In this section we will test the enrichment of GO terms with differentially expressed genes using two 
-statistical tests, namely Kolmogorov-Smirnov test and Fisher's exact test.
+Before going through each of those steps the user needs to decide which biological question one would like to investigate. 
+The aim of the study, as well as the nature of the available data, will dictate which test  statistic/methods need to used. 
+
+In this section we will test the enrichment of GO terms with differentially expressed genes using two statistical tests, namely Kolmogorov-Smirnov test and Fisher's exact test.
 
 
 ## Data preparation
