@@ -1410,7 +1410,7 @@ printGraph(GOdata, resultElim, firstSigNodes = 15, resultFis, fn.prefix = "tGO",
 
 \clearpage
 
-## Session Information
+## Session Information {-}
 
 The version number of R and packages loaded for generating the vignette were:
 
