@@ -3,8 +3,20 @@ Type: Package
 Title: Enrichment Analysis for Gene Ontology
 Version: 2.61.1
 Date: 2025-06-23
-Author: Adrian Alexa, Jorg Rahnenfuhrer
-Maintainer: Adrian Alexa <adrian.alexa@gmail.com>
+Authors@R: 
+    c(
+        person(
+            given = "Adrian", family = "Alexa", role = c("aut"),
+            email = "adrian.alexa@gmail.com"
+        ),
+        person(
+            given = "Jörg", family = "Rahnenführer", role = c("aut")
+        ),
+        person(
+            given = "Federico", family = "Marini", role = c("cre"), 
+            email = "marinif@uni-mainz.de", comment = c(ORCID = "0000-0003-3252-7758")
+        )
+    )
 Description: topGO package provides tools for testing GO terms while
         accounting for the topology of the GO graph. Different test
         statistics and different methods for eliminating local
