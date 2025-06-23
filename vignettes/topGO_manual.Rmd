@@ -1,3 +1,30 @@
+---
+title: >
+  Gene set enrichment analysis with topGO
+author:
+- name: Adrian Alexa,  Jörg Rahnenführer
+  affiliation: 
+  - AAJR
+  email: aajr@aajr.de
+- name: Federico Marini
+  affiliation: 
+  - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), Mainz
+  email: marinif@uni-mainz.de
+date: "`r BiocStyle::doc_date()`"
+package: "`r BiocStyle::pkg_ver('topGO')`"
+output: 
+  BiocStyle::html_document:
+    toc_float: true
+vignette: >
+  %\VignetteIndexEntry{Gene set enrichment analysis with topGO}
+  %\VignetteEncoding{UTF-8}  
+  %\VignettePackage{topGO}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+bibliography: ref_books.bib
+---
+
 %\VignetteIndexEntry{topGO}
 %\VignetteDepends{ALL, hgu95av2.db, genefilter, xtable, multtest, Rgraphviz}
 %\VignetteKeywords{topGO, GO, graph}
