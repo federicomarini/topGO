@@ -1,8 +1,8 @@
 Package: topGO
 Type: Package
 Title: Enrichment Analysis for Gene Ontology
-Version: 2.61.0
-Date: 2016-02-03
+Version: 2.61.1
+Date: 2025-06-23
 Author: Adrian Alexa, Jorg Rahnenfuhrer
 Maintainer: Adrian Alexa <adrian.alexa@gmail.com>
 Description: topGO package provides tools for testing GO terms while
