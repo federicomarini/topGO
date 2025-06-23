@@ -966,12 +966,12 @@ size of the graph (the ontology used), so be patient.
 Next we show how an instance of the {\tt groupStats} class can represent a gene set and how the test
 statistic is performed. 
 
-We compute the enrichment of {\it cellular lipid metabolic process} (GO:0044255) term using 
+We compute the enrichment of {\it lipid metabolic process} (GO:0006629) term using 
 Fisher's exact test. In order to do this we need to define the gene universe, to obtain the
-genes annotated to GO:0044255, and to define the set of significant genes.
+genes annotated to GO:0006629, and to define the set of significant genes.
 
 <<>>=
-goID <- "GO:0044255"
+goID <- "GO:0006629"
 gene.universe <- genes(GOdata)
 go.genes <- genesInTerm(GOdata, goID)[[1]]
 sig.genes <- sigGenes(GOdata)
