@@ -33,4 +33,6 @@ Suggests: ALL, hgu95av2.db, hgu133a.db, genefilter, xtable, multtest,
 Collate: AllClasses.R topGOmethods.R topGOgraph.R topGOalgo.R
         topGOfunctions.R topGOannotations.R topGOtests.R topGOviz.R
         zzz.R
+URL: https://github.com/federicomarini/topGO
+BugReports: https://github.com/federicomarini/topGO/issues
 biocViews: Microarray, Visualization
