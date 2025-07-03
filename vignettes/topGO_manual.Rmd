@@ -124,7 +124,7 @@ The next section presents a quick tour into `topGO` and is thought to be indepen
 of this manuscript. The remaining sections provide details on the functions used in the sample
 section as well as showing more advance functionality implemented in the `topGO` package.
 
-## Instalation
+## Installation
 
 This section briefly describe the necessary to get `topGO` running on your system. 
 We assume that the user have the R program (see the R project at http://www.r-project.org) already
@@ -675,7 +675,7 @@ table(y)
 ``` 
 
 There are $`r table(y)[1]`$ B-cell ALL samples and $`r table(y)[1]`$ T-cell ALL samples in
-the dataset. A two-sided $t$-test can by applied using the function `getPvalues` (a wraping function for 
+the dataset. A two-sided $t$-test can by applied using the function `getPvalues` (a wrapping function for 
 the `mt.teststat` from the `multtest` package). By default the function computes FDR (false discovery
 rate) adjusted $p$-value in order to account for multiple testing. A different type of correction can be
 specified using the `correction` argument.
@@ -938,7 +938,7 @@ Three types of enrichment tests can be distinguish if we look at the data used b
 \begin{itemize}
 -  Tests based on gene {\bf counts}. This is the most popular family of tests, given that 
   it only requires the presence of a list of interesting genes and nothing more. Tests like 
-  Fisher's exact test, Hypegeometric test and binomial test belong to this family. @Draghici2006
+  Fisher's exact test, Hypergeometric test and binomial test belong to this family. @Draghici2006
 -  Tests based on gene {\bf scores} or gene {\bf ranks}. It includes 
   Kolmogorov-Smirnov like tests (also known as GSEA), Gentleman's Category, $t$-test, etc. @Ackermann2009
 -  Tests based on gene {\bf expression}. Tests like Goeman's globaltest or GlobalAncova separates
