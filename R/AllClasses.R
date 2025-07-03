@@ -67,7 +67,7 @@ setClass("groupStats",
            allMembers = "character",
            ## the names of the mebers in the group (gene ID)
            members = "character",
-           ## function containing a statistical test takeing the
+           ## function containing a statistical test taking the
            ## parameter the object itself 
            testStatistic = "function",
            testStatPar = "list",
