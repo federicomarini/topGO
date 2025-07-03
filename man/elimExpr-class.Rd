@@ -61,7 +61,7 @@ Class \code{"\linkS4class{groupStats}"}, by class "weight01Expr", distance 3.
 
 
 \details{
-  TODO: Some datails here.....
+  TODO: Some details here.....
 }
 
 \author{Adrian Alexa}

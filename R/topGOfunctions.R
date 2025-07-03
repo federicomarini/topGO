@@ -61,7 +61,7 @@ if(!isGeneric("printGenes"))
 
 
 ## if the file argument is missing the function will just return
-## a list of data.frames, each data.frame containg the gene information for specified GO term
+## a list of data.frames, each data.frame containing the gene information for specified GO term
 setMethod("printGenes",
           signature(object = "topGOdata", whichTerms = "character", file = "missing"),
           function(object, whichTerms, chip, numChar = 100, simplify = TRUE,

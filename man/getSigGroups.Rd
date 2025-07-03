@@ -45,14 +45,14 @@ whichTests()
 
 \arguments{
   \item{object}{An object of class \code{topGOdata}
-    This object contains all data necessary for runnig the test.}
+    This object contains all data necessary for running the test.}
 
   \item{test.stat}{An object of class \code{groupStats}. This object
     defines the test statistic.}
   
-  \item{algorithm}{Character string specifing which algorithm to use.} 
+  \item{algorithm}{Character string specifying which algorithm to use.} 
   
-  \item{statistic}{Character string specifing which test to use.} 
+  \item{statistic}{Character string specifying which test to use.} 
   
   \item{\dots}{Other parameters. In the case of \code{runTest} they are
     used for defining the test statistic}

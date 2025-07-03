@@ -139,7 +139,7 @@ printGenes(object, whichTerms, file, ...)
 }
 
 \value{
-  A data.frame or a list of data.fames.
+  A data.frame or a list of data.frames.
 }
 
 \author{Adrian Alexa}

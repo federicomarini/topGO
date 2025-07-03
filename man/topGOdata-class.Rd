@@ -124,14 +124,14 @@
     \item{geneSelectionFun}{\code{signature(object = "topGOdata")}: ... }
 
     \item{genes}{\code{signature(object = "topGOdata")}: A method for
-      obtaining the list of genes, as a characther vector, which will be
+      obtaining the list of genes, as a character vector, which will be
       used in the further analysis.}
     \item{numGenes}{\code{signature(object = "topGOdata")}: A method for
       obtaining the number of genes, which will be used in the further
       analysis. It has the same effect as: \code{lenght(genes(object))}.}
 
     \item{sigGenes}{\code{signature(object = "topGOdata")}:  A method for
-      obtaining the list of significant genes, as a charachter vector.}
+      obtaining the list of significant genes, as a character vector.}
         
     \item{genesInTerm}{\code{signature(object = "topGOdata", whichGO = "character")}: ... }
     \item{genesInTerm}{\code{signature(object = "topGOdata", whichGO = "missing")}: ... }

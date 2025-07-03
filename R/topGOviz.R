@@ -1,4 +1,4 @@
-## this file contains code for visualizing the GO DAG and other ploting functions ....
+## this file contains code for visualizing the GO DAG and other plotting functions ....
 
 showGroupDensity <- function(object, whichGO, ranks = FALSE, rm.one = TRUE) {
 
@@ -101,7 +101,7 @@ setMethod("printGraph",
 ## sigNodes:     a named vector of terms p-values, the names are the GO terms
 ## wantedNodes:  the nodes that we want to find, we will plot this nodes with
 ##               a different color. The vector contains the names pf the nodes
-## oldSigNodes:  used to plot the (new) sigNodes in the same collor range
+## oldSigNodes:  used to plot the (new) sigNodes in the same color range
 ##               as the old ones
 ## export.to.dot.file: is a global variable given the name of the output .dot file
 GOplot <- function(dag, sigNodes, dag.name = 'GO terms', edgeTypes = T,
@@ -341,9 +341,9 @@ GOplot.counts <- function(dag, wantedNodes, dag.name = 'GO terms',
 ##              parameters, plus their children. if putCL = 1 than only the 
 ##              children are added, if putCL = n we get the nodes form the
 ##              next n levels.
-## type      -- used for ploting pie charts
-## swPlot    -- if true the graph is ploted, if not no ploting is done.
-## useInfo   -- aditional info to be ploted for a node
+## type      -- used for plotting pie charts
+## swPlot    -- if true the graph is ploted, if not no plotting is done.
+## useInfo   -- additional info to be ploted for a node
 showSigOfNodes <- function(GOdata, termsP.value, firstSigNodes = 10, reverse = TRUE,
                             sigForAll = TRUE, wantedNodes = NULL, putWN = TRUE,
                            putCL = 0, type = NULL, showEdges = TRUE, swPlot = TRUE,
@@ -366,7 +366,7 @@ showSigOfNodes <- function(GOdata, termsP.value, firstSigNodes = 10, reverse = T
   if(length(baseNodes) == 0)
     stop('No nodes were selected')
   
-  ## we want to get aditional nodes
+  ## we want to get additional nodes
   if(putCL) {
     goDAG.r2l <- reverseArch(graph(GOdata))
 
