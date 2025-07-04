@@ -2,13 +2,16 @@
 title: >
   Gene set enrichment analysis with topGO
 author:
-- name: Adrian Alexa,  Jörg Rahnenführer
+- name: Adrian Alexa
   affiliation: 
-  - AAJR
-  email: aajr@aajr.de
+  - Max Planck Institute for Informatics, Saarbrücken, Germany
+  email: adrian.alexa@gmail.com
+- name: Jörg Rahnenführer
+  affiliation: 
+  - Max Planck Institute for Informatics, Saarbrücken, Germany
 - name: Federico Marini
   affiliation: 
-  - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), Mainz
+  - Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), Mainz, Germany
   email: marinif@uni-mainz.de
 date: "`r BiocStyle::doc_date()`"
 package: "`r BiocStyle::pkg_ver('topGO')`"
@@ -19,58 +22,34 @@ vignette: >
   %\VignetteIndexEntry{Gene set enrichment analysis with topGO}
   %\VignetteEncoding{UTF-8}  
   %\VignettePackage{topGO}
+  %\VignetteKeywords{GeneExpression, Transcriptomics, GeneSetEnrichment, GO, 
+  Annotation, Pathways, SystemsBiology, Microarray, Sequencing, Visualization, 
+  Software}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
 bibliography: ref_books.bib
 ---
 
-%\VignetteIndexEntry{topGO}
-%\VignetteDepends{ALL, hgu95av2.db, genefilter, xtable, multtest, Rgraphviz}
-%\VignetteKeywords{topGO, GO, graph}
-%\VignettePackage{topGO}
+<style type="text/css">
+.smaller {
+  font-size: 10px
+}
+</style>
 
-\documentclass[a4paper, oneside, 10pt]{article}
-
-\usepackage[pdftex]{graphicx}
-\usepackage{calc}
-\usepackage{sectsty}
-\usepackage{caption}
-\usepackage{natbib}
-\renewcommand{\captionfont}{\it\sffamily}
-\renewcommand{\captionlabelfont}{\bf\sffamily}
-\allsectionsfont{\sffamily}
-
-% page style %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[a4paper, left=25mm, right=20mm, top=20mm, bottom=25mm, nohead]{geometry}
-\setlength{\parskip}{1.5ex}
-\setlength{\parindent}{0cm}
-\pagestyle{empty}
-
-
-\usepackage{Sweave}
-\SweaveOpts{prefix.string = tGO}
-
-
-\title{\vspace*{-6ex} Gene set enrichment analysis with {\bf topGO}}
-\author{Adrian Alexa,  J\"org Rahnenf\"uhrer}
-\date{\today \\%
-  \texttt{http://www.mpi-sb.mpg.de/$\sim$alexa}}
-
-\begin{document}
-\maketitle
-
-%%\newpage
-\tableofcontents
-\newpage
-
-```{r echo = FALSE}
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment  = "#>",
+  error    = FALSE,
+  warning  = FALSE,
+  eval     = TRUE,
+  message  = FALSE
+)
 options(width = 95)
-## we better keep the data in data frames as strings
-options(stringsAsFactors = FALSE)
-``` 
+```
 
-## Introduction
+# Introduction
 
 The `topGO` package is designed to facilitate semi-automated enrichment analysis for Gene Ontology (GO) terms. 
 The process consists of input of normalised gene expression measurements, gene-wise correlation or differential 
