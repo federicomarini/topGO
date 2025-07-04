@@ -35,4 +35,5 @@ Collate: AllClasses.R topGOmethods.R topGOgraph.R topGOalgo.R
         zzz.R
 URL: https://github.com/federicomarini/topGO
 BugReports: https://github.com/federicomarini/topGO/issues
-biocViews: Microarray, Visualization
+biocViews: GeneExpression, Transcriptomics, GeneSetEnrichment, GO, Annotation, 
+  Pathways, SystemsBiology, Microarray, Sequencing, Visualization, Software
