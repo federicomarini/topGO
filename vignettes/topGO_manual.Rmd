@@ -695,15 +695,15 @@ Once the `topGOdata` object is created the user can use various methods defined 
 access the information encapsulated in the object.
 
 The `description` slot contains information about the experiment. This information can be accessed or
-replaced using the method with the same name. 
+replaced using the method with the same name.
+
 ```{r results = 'hide'}
 description(GOdata)
 description(GOdata) <- paste(description(GOdata), "Object modified on:", format(Sys.time(), "%d %b %Y"), sep = " ")
 description(GOdata)
 ``` 
 
-Methods to obtain the list of genes that will be used in the further analysis or methods for obtaining all 
-gene scores are exemplified below.
+Methods to obtain the list of genes that will be used in the further analysis or methods for obtaining all gene scores are exemplified below.
 
 ```{r}
 a <- genes(GOdata) ## obtain the list of genes
@@ -712,17 +712,17 @@ numGenes(GOdata)
 ``` 
 
 Next we describe how to retrieve the score of a specified set of genes, e.g. a set of randomly selected genes.
-If the object was constructed using a list of interesting genes, then the factor vector that was provided at
-the building of the object will be returned.
+If the object was constructed using a list of interesting genes, then the factor vector that was provided at the building of the object will be returned.
 
-```{r results = 'hide'}
+```{r}
 selGenes <- sample(a, 10)
 gs <- geneScore(GOdata, whichGenes = selGenes) 
 print(gs)
 ```
 
 If the user wants an unnamed vector or the score of all genes:
-```{r results = 'hide'}
+
+```{r}
 gs <- geneScore(GOdata, whichGenes = selGenes, use.names = FALSE)
 print(gs)
 
@@ -731,7 +731,8 @@ str(gs)
 ``` 
 
 The list of significant genes can be accessed using the method `sigGenes`.
-```{r results = 'hide'} 
+
+```{r} 
 sg <- sigGenes(GOdata)
 str(sg)
 numSigGenes(GOdata)
@@ -744,13 +745,12 @@ feasible ones, one can type:
 ```{r results = 'hide'}
 .geneList <- geneScore(GOdata, use.names = TRUE)
 GOdata ## more available genes
-GOdata <- updateGenes(GOdata, .geneList, topDiffGenes)
+GOdata <- updateGenes(GOdata, geneList = .geneList, geneSelFun = topDiffGenes)
 GOdata ## the available genes are now the feasible genes
 ``` 
 
-There are also methods available for accessing information related to GO and its structure. First, we want to
-know which GO terms are available for analysis and to obtain all the genes annotated to a subset of
-these GO terms.
+There are also methods available for accessing information related to GO and its structure. 
+First, we want to know which GO terms are available for analysis and to obtain all the genes annotated to a subset of these GO terms.
 
 ```{r}
 graph(GOdata) ## returns the GO graph
@@ -773,6 +773,7 @@ head(ann.genes)
 
 When the `sel.terms` argument is missing all GO terms are used. The scores for all genes, possibly 
 annotated with names of the genes, can be obtained using the method `scoresInTerm()`.
+
 ```{r results = 'hide'}
 ann.score <- scoresInTerm(GOdata, sel.terms)
 head(ann.score)
@@ -783,14 +784,10 @@ head(ann.score)
 Finally, some statistics for a set of GO terms are returned by the method `termStat`. As mentioned
 previously, if the `sel.terms` argument is missing then the statistics for all available GO terms
 are returned.
+
 ```{r}
 termStat(GOdata, sel.terms)
 ``` 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 
 # Running the enrichment tests
@@ -802,24 +799,17 @@ object is available.
 which take the GO dependencies into account. At the base of this design stands a S4 class
 mechanism which facilitates defining and executing a (new) group test.
 Three types of enrichment tests can be distinguish if we look at the data used by the each test.
-\begin{itemize}
--  Tests based on gene {\bf counts}. This is the most popular family of tests, given that 
+
+- Tests based on gene **counts**. This is the most popular family of tests, given that 
   it only requires the presence of a list of interesting genes and nothing more. Tests like 
-  Fisher's exact test, Hypergeometric test and binomial test belong to this family. @Draghici2006
--  Tests based on gene {\bf scores} or gene {\bf ranks}. It includes 
-  Kolmogorov-Smirnov like tests (also known as GSEA), Gentleman's Category, $t$-test, etc. @Ackermann2009
--  Tests based on gene {\bf expression}. Tests like Goeman's globaltest or GlobalAncova separates
-  from the others since they work directly on the expression matrix. @Goeman2007
-\end{itemize}
+  Fisher's exact test, Hypergeometric test and binomial test belong to this family [@Draghici2006].
+- Tests based on gene **scores** or gene **ranks**. It includes 
+  Kolmogorov-Smirnov like tests (also known as GSEA), Gentleman's Category, $t$-test, etc. [@Ackermann2009].
+- Tests based on gene **expression**. Tests like Goeman's globaltest or GlobalAncova separate
+  from the others since they work directly on the expression matrix [@Goeman2007].
+
 There are also a number of strategies/algorithms to account for the GO topology, see
 Table \@ref(tab:algos), each of them having specific requirements.  
-
-\begin{figure}[!b]
-\centering 
-\includegraphics[width=.8\linewidth]{topGO_classes_v3}
-\caption{The test statistics class structure.}
-{#fig:topGOclasses}
-\end{figure}
 
 For each test type described above and for each algorithm there is S4 class defined in the
 package. The main idea is to have a class (container) which can store, for a specified gene
@@ -830,15 +820,17 @@ then run the iterator function on this object.
 
 The defined S4 classes are organised in a hierarchy which is showed in Figure \@ref(fig:topGOclasses).
 
-% {\it The advantage of this design is that it ensures that each test statistics is used with the
-%   appropriate algorithms}.
+<!-- The advantage of this design is that it ensures that each test statistics is used with the appropriate algorithms. -->
+
+```{r topGOclasses, echo=FALSE, fig.cap="The test statistics class structure."}
+knitr::include_graphics("topGO_classes_v3.png")
+```
 
 There are two possibilities(or interfaces) for applying a test statistic to an object of class
 `topGOdata`. The basic interface, which provides the core of the testing procedure in `topGO`, 
 offers more flexibility to the experienced `R` user allowing him to implement new test statistics
 or new algorithms. The second interface is more user friendly but at the same time more restrictive
 in the choice of the tests and algorithms used. We will further explain how these two interfaces work.
-
 
 ## Defining and running the test {#sub:define_test}
 
@@ -853,9 +845,8 @@ the classic algorithm will be used. The `getSigGroups()` function can take a whi
 size of the graph (the ontology used), so be patient. 
 
 
+### The `groupStats` classes {-}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection*{The `groupStats` classes}
 Next we show how an instance of the `groupStats` class can represent a gene set and how the test
 statistic is performed. 
 
@@ -904,8 +895,8 @@ the `elimCount` class. We randomly select $25\%$ of the annotated genes as genes
 set.seed(123)
 elim.genes <- sample(go.genes, length(go.genes) / 4)
 elim.group <- new("elimCount", testStatistic = GOFisherTest, name = "fisher",
-                allMembers = gene.universe, groupMembers = go.genes,
-                sigMembers = sig.genes, elim = elim.genes)
+                  allMembers = gene.universe, groupMembers = go.genes,
+                  sigMembers = sig.genes, elim = elim.genes)
 
 contTable(elim.group)
 runTest(elim.group)
@@ -918,9 +909,7 @@ except that each hierarchy has its own specialised methods for computing statist
 Please note that the `groupStats` class or any descendent class does not depend on GO, and an object of
 such a class can be instantiated using any gene set. 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection*{Performing the test}
+### Performing the test {-}
 
 According to the mechanism described above, one first defines a test statistic for the chosen algorithm, 
 meaning that an instance of object specific for the algorithm is constructed in which only the test 
@@ -939,7 +928,7 @@ test.stat <- new("classicCount", testStatistic = GOFisherTest, name = "Fisher te
 resultFisher <- getSigGroups(GOdata, test.stat)
 ``` 
 
-%% `getSigGroups` returns an object of class `topGOresult`.
+<!-- `getSigGroups` returns an object of class `topGOresult`. -->
 A short summary on the used test and the results is printed at the R console.
 
 ```{r}
@@ -948,7 +937,7 @@ resultFisher
  
 To use the Kolmogorov-Smirnov (KS) test one needs to provide the gene-wise scores and thus we need
 to instantiate an object of a class which is able to deal of the scores. Such a class is the 
-`classicScore` class, see Figure~\@ref(fig:topGOclasses) which will let us run the `classic`
+`classicScore` class, see Figure \@ref(fig:topGOclasses) which will let us run the `classic`
 algorithm.
 
 ```{r results = 'hide'}
@@ -956,9 +945,8 @@ test.stat <- new("classicScore", testStatistic = GOKSTest, name = "KS tests")
 resultKS <- getSigGroups(GOdata, test.stat)
 ``` 
 
-%Please note that there are extra parameters for `elim` and `weight`, but we won't discuss them at this point. 
-%This time we used the class `classicScore`. This is done since the KS test needs scores of all genes and
-%in this case the *representation* of a group of genes (GO term) is different. 
+<!-- Please note that there are extra parameters for `elim` and `weight`, but we won't discuss them at this point.  -->
+<!-- This time we used the class `classicScore`. This is done since the KS test needs scores of all genes and in this case the *representation* of a group of genes (GO term) is different.  -->
 
 The mechanism presented above for `classic` also hold for `elim` and `weight`. The user
 should pay attention to the compatibility between the chosen class and the function for computing 
@@ -967,14 +955,16 @@ example the `weight` algorithm will not work with classes based on gene-wise sco
 To run the `elim` algorithm with KS test one needs to type: 
 
 ```{r eval = FALSE, results = 'hide'}
-test.stat <- new("elimScore", testStatistic = GOKSTest, name = "Fisher test", cutOff = 0.01)
+test.stat <- new("elimScore", testStatistic = GOKSTest, 
+                 name = "Fisher test", cutOff = 0.01)
 resultElim <- getSigGroups(GOdata, test.stat)
 ``` 
 
 Similarly, for the `weight` algorithm with Fisher's exact test one types:
 
 ```{r results = 'hide'}
-test.stat <- new("weightCount", testStatistic = GOFisherTest, name = "Fisher test", sigRatio = "ratio")
+test.stat <- new("weightCount", testStatistic = GOFisherTest, 
+                 name = "Fisher test", sigRatio = "ratio")
 resultWeight <- getSigGroups(GOdata, test.stat)
 ``` 
 
@@ -984,36 +974,31 @@ resultWeight <- getSigGroups(GOdata, test.stat)
 The $p$-values return by the `getSigGroups` function are row $p$-values. There is no multiple testing
 correction applied to them, unless the test statistic directly incorporate such a correction. Of course,
 the researcher can perform an adjustment of the $p$-values if he considers it is important for the analysis.
-The reason for not automatically correcting for multiple testing are:
+The reasons for not automatically correcting for multiple testing are:
 
-\begin{itemize}
--  In many cases the row $p$-values return by an enrichment analysis are not that extreme. 
-  %%Also, there are many terms with similar  $p$-values.
+- In many cases the row $p$-values return by an enrichment analysis are not that extreme. 
+  <!-- Also, there are many terms with similar  $p$-values. -->
   A FDR/FWER adjustment procedure can in this case produce very conservative $p$-values and declare no,
   or very few, terms as significant. This is not necessary a bad thing, but it can happen that there are
   interesting GO terms which didn't make it over the cutoff but they are omitted and thus valuable
   information lost. In this case the researcher might be interested in the ranking of the GO terms even
   though no top term is significant at a specify FDR level.
   
--   One should keep in mind that an enrichment analysis consist of many steps and there are many
+- One should keep in mind that an enrichment analysis consist of many steps and there are many
   assumptions done before applying, for example, Fisher's  exact test on a set of GO terms. Performing
   a multiple testing procedure accounting only on the number of GO terms is far from being enough to
   control the error rate.
 
--  For the methods that account for the GO topology like `elim` and `weight`, the problem of
+- For the methods that account for the GO topology like `elim` and `weight`, the problem of
   multiple testing is even more complicated. Here one computes the $p$-value of a GO term conditioned on
   the neighbouring terms. The tests are therefore not independent and the multiple testing theory does
   not directly apply. We like to interpret the $p$-values returned by these methods as corrected or not
   affected by multiple testing.
-\end{itemize}
 
+<!-- ## Adding a new test -->
 
-
-## Adding a new test
-
-%%section to show how a test statistic can be implemented.
-{\large\bf Example for the Category test ....}
-
+<!-- section to show how a test statistic can be implemented. -->
+<!-- **Example for the Category test ...** -->
 
 
 ## `runTest`: a high-level interface for testing
@@ -1022,10 +1007,9 @@ Over the basic interface we implemented an abstract layer to provide the users w
 interface for running the enrichment tests. The interface is composed by a function, namely the
 `runTest` function, which can be used only with a predefined set of test statistics and 
 algorithms. In fact `runTest` is a warping function for the set of commands used for defining
-and running a test presented in Section~\@ref(sub:define_test).
+and running a test presented in Section \@ref(sub:define_test).
 
-%%In fact the `runTest` function is a warping of the `getSigGroups` and the 
-%%initialisation of a `groupStats` object functions. 
+<!-- In fact the `runTest` function is a warping of the `getSigGroups` and the initialisation of a `groupStats` object functions.  -->
 
 There are three main arguments that this function takes. The first argument is an object of class
 `topGOdata`. The second argument, named `algorithm`, is of type character and specifies which
@@ -1048,7 +1032,6 @@ Bellow we can see more examples using the `runTest` function.
 weight01.fisher <- runTest(GOdata, statistic = "fisher")
 weight01.t <- runTest(GOdata, algorithm = "weight01", statistic = "t")
 elim.ks <- runTest(GOdata, algorithm = "elim", statistic = "ks")
-
 weight.ks <- runTest(GOdata, algorithm = "weight", statistic = "ks") #will not work!!!
 ``` 
 
@@ -1061,10 +1044,8 @@ whichTests()
 whichAlgorithms()
 ``` 
 
-There is no advantage of using the runTest() over getSigGroups() except that it is more user friendly and 
-it gives cleaner code. However, if the user wants to define his own test statistic or implement a new 
-algorithm based on the available `groupStats` classes, then it would be not possible to use the
-`runTest` function. 
+There is no advantage of using the `runTest()` over `getSigGroups()`, except that it is more user friendly and it gives cleaner code. 
+However, if the user wants to define his own test statistic or implement a new algorithm based on the available `groupStats` classes, then it would be not possible to use the `runTest()` function. 
 
 Finally, the function can pass extra arguments to the initialisation method for an `groupStats` object. 
 Thus, one can specify different cutoffs for the `elim` method, or arguments for the `weight` method. 
