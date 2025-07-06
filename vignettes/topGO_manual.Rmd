@@ -88,7 +88,7 @@ The `elim` and `weight` algorithms were introduced in [@Alexa2006]. The default 
 used by the `topGO` package is a mixture between the `elim` and the `weight` algorithms and
 it will be referred as `weight01`. The `parentChild` algorithm was introduced by [@Grossmann2007].
 
-We assume the user has a good understanding of GO, see [@GOC01], and is familiar with gene set enrichment tests. Also this document requires basic knowledge of R language.
+We assume the user has a good understanding of GO, see [@GOC01;@YonRhee2008], and is familiar with gene set enrichment tests. Also this document requires basic knowledge of R language.
 
 The next section presents a quick tour into `topGO` and is thought to be independent of the rest
 of this manuscript. The remaining sections provide details on the functions used in the sample
