@@ -1054,14 +1054,12 @@ Thus, one can specify different cutoffs for the `elim` method, or arguments for 
 # Interpretation and visualization of results
 
 This section present the available tools for analysing and interpreting the results of the performed tests.
-Both `getSigGroups` and `runTest` functions return an object of type `topGOresult`, and most of
-the following functions work with this object.
+Both `getSigGroups` and `runTest` functions return an object of type `topGOresult`, and most of the following functions work with this object.
 
 ## The `topGOresult` object
 
 The structure of the `topGOresult` object is quite simple. It contains the $p$-values or the statistics
-returned by the test and basic informations on the used test statistic/algorithm. The information stored in
-the `topGOdata` object is not carried over this object, and both of these objects will be needed 
+returned by the test and basic informations on the used test statistic/algorithm. The information stored in the `topGOdata` object is not carried over this object, and both of these objects will be needed 
 by the diagnostic tools. 
 
 *Since the test statistic can return either a $p$-value or a statistic of the data, we will refer them as scores!*
@@ -1070,21 +1068,17 @@ To access the stored $p$-values, the user should use the function `score`. It re
 vector, were the names are GO identifiers. For example, we can look at the histogram of the results
 of the Fisher's exact test and the `classic` algorithm.
 
-\setkeys{Gin}{width=.4\linewidth}
-\begin{figure}[!h]
-  \centering 
-```{r fig = TRUE}
-pvalFis <- score(resultFis)
-head(pvalFis)
-hist(pvalFis, 50, xlab = "p-values")
-``` 
-\end{figure}
-
-By default, the `score` function does not warranty the order in which the $p$-values are returned, 
+By default, the `score` function does not warrant the order in which the $p$-values are returned, 
 as we can see if we compare the `resultFis` object with the `resultWeight` object:
 
 ```{r}
 head(score(resultWeight))
+``` 
+
+```{r}
+pvalFis <- score(resultFis)
+head(pvalFis)
+hist(pvalFis, 50, xlab = "p-values")
 ``` 
 
 However, the `score` method has a parameter, `whichGO`, which takes a list of GO identifiers and
@@ -1099,9 +1093,7 @@ head(pvalWeight)
 cor(pvalFis, pvalWeight)
 ``` 
 
-Basic information on input data can be accessed using the `geneData` function. The number of annotated genes, 
-the number of significant genes (if it is the case), the minimal size of a GO category as well as the number 
-of GO categories which have at least one significant gene annotated are listed:
+Basic information on input data can be accessed using the `geneData` function. The number of annotated genes, the number of significant genes (if it is the case), the minimal size of a GO category as well as the number of GO categories which have at least one significant gene annotated are listed:
 
 ```{r}
 geneData(resultWeight)
@@ -1117,24 +1109,20 @@ with the `orderBy` argument. This argument allows the user decide which $p$-valu
 ordering the GO terms. 
 
 ```{r}
-allRes <- GenTable(GOdata, classic = resultFis, KS = resultKS, weight = resultWeight,
-                   orderBy = "weight", ranksOf = "classic", topNodes = 20)
+allRes <- GenTable(GOdata, classic = resultFis, KS = resultKS, 
+                   weight = resultWeight, orderBy = "weight", 
+                   ranksOf = "classic", topNodes = 20)
 ``` 
 
 Please note that we need to type the full names (the exact name) of the function arguments: `topNodes`,
 `rankOf`, etc. This is the price paid for flexibility of specifying different number of `topGOresults` 
 objects. The table includes statistics on the GO terms plus the $p$-values returned by the other algorithms/test
-statistics. Table~\@ref(tab:GOresults) shows the informations included in the `data.frame`.
+statistics. Table \@ref(tab:GOresults) shows the informations included in the `data.frame`.
 
-\begin{table}[!t]
-  \centering\resizebox{.99\linewidth}{!}{%
-```{r echo = FALSE}
-if(require(xtable))
-  print(xtable(apply(allRes, 2, as.character)), floating = FALSE)
+```{r GOresults, echo = FALSE}
+knitr::kable(allRes, 
+             caption = "Significance of GO terms according to different tests.")
 ```
-}\caption{Significance of GO terms according to different tests.}
-{#tab:GOresults}
-\end{table}
 
 
 ## Analysing individual GOs
@@ -1149,30 +1137,22 @@ in the gene universe which are not annotated to the GO term). This can be easily
 `showGroupDensity` function. For example, lets look at the distribution of the genes annotated to 
 the most significant GO term w.r.t. the `weight` algorithm. 
 
-\setkeys{Gin}{width=.4\linewidth}
-\begin{figure}[!bh]
-  \centering 
-```{r fig = TRUE}
+```{r geneDensityDiff, fig.cap="Distribution of the gene's rank from GO:0031580, compared with the null distribution."}
 goID <- allRes[1, "GO.ID"]
 print(showGroupDensity(GOdata, goID, ranks = TRUE))
 ``` 
-\caption{Distribution of the gene' rank from `r goID`, compared with the null distribution.}
-{#fig:geneDensityDiff}
-\end{figure}
 
-We can see in Figure~\@ref(fig:geneDensityDiff) that the genes annotated to `r goID` have low ranks
+We can see in Figure \@ref(fig:geneDensityDiff) that the genes annotated to `r goID` have low ranks
 (genes with low $p$-value of the $t$-test). The distribution of the ranks is skewed on the left side 
 compared with the reference distribution given by the complementary gene set. This is a nice example
 in which there is a significant difference in the distribution of scores between the gene set and the 
-complementary set, and we see from Table~\@ref(tab:GOresults) that this GO is found as significantly 
+complementary set, and we see from Table \@ref(tab:GOresults) that this GO is found as significantly 
 enriched by all methods used.
 
 In the above example, the genes with a $p$-value equal to $1$ were omitted. They can be included using 
 the value `FALSE` for the `rm.one` argument in the `showGroupDensity` function.
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% the printGenes function
+<!-- the printGenes function -->
 Another useful function for analysing terms of interest is `printGenes`. The function will generate 
 a table with all the genes/probes annotated to the specified GO term. Various type of identifiers, the 
 gene name and the $p$-values/statistics are provided in the table. 
@@ -1182,17 +1162,11 @@ goID <- allRes[10, "GO.ID"]
 gt <- printGenes(GOdata, whichTerms = goID, chip = affyLib, numChar = 40)
 ``` 
 
-\begin{table}[!ht]
-  \centering\resizebox{.99\linewidth}{!}{%
-```{r echo = FALSE}
-if(require(xtable))
-  print(xtable(gt), floating = FALSE)
+```{r printGenes1, echo = FALSE}
+knitr::kable(gt, caption = "Genes annotated to GO:0043378")
 ```
-}\caption{Genes annotated to `r goID`.}
-{#tab:printGenes1}
-\end{table}
 
-The `data.frame` containing the genes annotated to `r goID` is shown in Table~\@ref(tab:printGenes1).
+The `data.frame` containing the genes annotated to `r goID` is shown in Table \@ref(tab:printGenes1).
 One or more GO identifiers can be given to the function using the `whichTerms` argument. When more than
 one GO is specified, the function returns a list of data.frames, otherwise only one `data.frame` is returned.
 *The function has a argument `file` which, when specified, will save the results into a file using the  CSV format.*
@@ -1201,64 +1175,47 @@ For the moment the function will work only when the chip used has an annotation 
 Bioconductor. It will not work with other type of custom annotations. 
 
 
-
 ## Visualising the GO structure
 
-An insightful way of looking at the results of the analysis is to investigate how the significant GO
-terms are distributed over the GO graph. We plot the subgraphs induced by the most significant GO terms 
-reported by `classic` and `weight` methods. There are two functions available. The `showSigOfNodes`
-will plot the induced subgraph to the current graphic device. The `printGraph` is a warping function
-of `showSigOfNodes` and will save the resulting graph into a PDF or PS file. 
+An insightful way of looking at the results of the analysis is to investigate how the significant GO terms are distributed over the GO graph. 
+We plot the subgraphs induced by the most significant GO terms reported by `classic` and `weight` methods. 
+There are two functions available. The `showSigOfNodes` will plot the induced subgraph to the current graphic device. The `printGraph` is a wrapping function of `showSigOfNodes` and will save the resulting graph into a PDF or PS file. 
 
-```{r eval = FALSE}
+```{r, GOclassic, fig.height=8, fig.cap="The subgraph induced by the top 5 GO terms identified by the `classic` algorithm for scoring GO terms for enrichment. Boxes indicate the 5 most significant terms. Box color represents the relative significance, ranging from dark red (most significant) to light yellow (least significant). Black arrows indicate *is-a* relationships and red arrows *part-of* relationships.", results='hide'}
 showSigOfNodes(GOdata, score(resultFis), firstSigNodes = 5, useInfo = 'all')
+```
+
+
+```{r GOweight, fig.height=8, fig.cap="The subgraph induced by the top 5 GO terms identified by the `weight` algorithm for scoring GO terms for enrichment. Boxes indicate the 5 most significant terms. Box color represents the relative significance, ranging from dark red (most significant) to light yellow (least significant). Black arrows indicate *is-a* relationships and red arrows *part-of* relationships.", results='hide'}
 showSigOfNodes(GOdata, score(resultWeight), firstSigNodes = 5, useInfo = 'def')
+```
+
+```{r eval=FALSE}
+printGraph(GOdata, resultFis, firstSigNodes = 5, 
+           fn.prefix = "tGO", useInfo = "all", pdfSW = TRUE)
+printGraph(GOdata, resultWeight, firstSigNodes = 5, 
+           fn.prefix = "tGO", useInfo = "def", pdfSW = TRUE)
 ``` 
 
-```{r results = 'hide'}
-printGraph(GOdata, resultFis, firstSigNodes = 5, fn.prefix = "tGO", useInfo = "all", pdfSW = TRUE)
-printGraph(GOdata, resultWeight, firstSigNodes = 5, fn.prefix = "tGO", useInfo = "def", pdfSW = TRUE)
-``` 
-
-In the plots, the {\em significant nodes} are represented as rectangles. The plotted graph is
-the upper induced graph generated by these {\em significant nodes}. 
+In the plots, the *significant nodes* are represented as rectangles. The plotted graph is
+the upper induced graph generated by these *significant nodes*. 
 These graph plots are used to see how the significant GO terms are distributed in the hierarchy. It is a
-very useful tool to realize behaviour of various enrichment methods and to better understand which of the
-significant GO terms are really of interest. 
-
-\begin{figure}[!t]
-\centering 
-\includegraphics[width=1.05\linewidth]{tGO_classic_5_all}
-\caption{The subgraph induced by the top 5 GO terms identified by the `classic` algorithm for
-  scoring GO terms for enrichment. Boxes indicate the 5 most significant terms. Box color represents the
-  relative significance, ranging from dark red (most significant) to light yellow (least significant).
-  Black arrows indicate *is-a* relationships and red arrows *part-of* relationships.}
-{#fig:GOclassic}
-\end{figure}
-
-
-\begin{figure}[!t]
-{#fig:GOweight}\centering 
-\includegraphics[width=1.05\linewidth]{tGO_weight_5_def}
-\caption{The subgraph induced by the top 5 GO terms identified by the `weight` algorithm for
-  scoring GO terms for enrichment. Boxes indicate the 5 most significant terms. Box color represents the
-  relative significance, ranging from dark red (most significant) to light yellow (least significant).
-  Black arrows indicate *is-a* relationships and red arrows *part-of* relationships.}
-\end{figure}
+very useful tool to realize behaviour of various enrichment methods and to better understand which of the significant GO terms are really of interest. 
 
 We can emphasise differences between two methods using the `printGraph` function:
+
 ```{r eval = FALSE}
-printGraph(GOdata, resultWeight, firstSigNodes = 10, resultFis, fn.prefix = "tGO", useInfo = "def")
-printGraph(GOdata, resultElim, firstSigNodes = 15, resultFis, fn.prefix = "tGO", useInfo = "all")
+printGraph(GOdata, resultWeight, firstSigNodes = 10, resultFis, 
+           fn.prefix = "tGO", useInfo = "def", pdfSW = TRUE)
+printGraph(GOdata, resultElim, firstSigNodes = 15, resultFis, 
+           fn.prefix = "tGO", useInfo = "all", pdfSW = TRUE)
 ``` 
 
-\clearpage
-
-# Session Information {- .smaller}
+# Session Information {-}
 
 The version number of R and packages loaded for generating the vignette were:
 
-```{r echo=FALSE,results}
+```{r echo=FALSE}
 sessionInfo()
 ```
 
