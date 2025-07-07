@@ -38,14 +38,15 @@ Imports:
   matrixStats, 
   DBI 
 Suggests: 
-  ALL, 
-  hgu95av2.db, 
-  hgu133a.db, 
-  genefilter, 
-  xtable, 
+  ALL,
+  hgu95av2.db,
+  hgu133a.db,
+  genefilter,
   multtest,
-  Rgraphviz, 
-  globaltest
+  Rgraphviz,
+  globaltest,
+  knitr,
+  rmarkdown
 Collate: 
   AllClasses.R 
   topGOmethods.R 
