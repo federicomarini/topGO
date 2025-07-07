@@ -46,6 +46,7 @@ Suggests:
   Rgraphviz,
   globaltest,
   knitr,
+  BiocStyle,
   rmarkdown
 Collate: 
   AllClasses.R 
