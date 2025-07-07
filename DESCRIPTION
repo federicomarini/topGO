@@ -56,6 +56,7 @@ Collate:
   topGOtests.R
   topGOviz.R
   zzz.R
+VignetteBuilder: knitr
 URL: https://github.com/federicomarini/topGO
 BugReports: https://github.com/federicomarini/topGO/issues
 biocViews: GeneExpression, Transcriptomics, GeneSetEnrichment, GO, Annotation, 
