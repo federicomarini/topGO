@@ -36,14 +36,14 @@ Depends:
 Imports: 
   lattice, 
   matrixStats, 
+  Rgraphviz,
+  multtest,
   DBI 
 Suggests: 
   ALL,
   hgu95av2.db,
   hgu133a.db,
   genefilter,
-  multtest,
-  Rgraphviz,
   globaltest,
   knitr,
   BiocStyle,
