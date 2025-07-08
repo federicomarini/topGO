@@ -351,7 +351,7 @@ showSigOfNodes <- function(GOdata, termsP.value, firstSigNodes = 10, reverse = T
                            useInfo = c('none', 'pval', 'counts', 'def', 'np', 'all')[1],
                            plotFunction = GOplot, .NO.CHAR = 20) {
 
-  require('Rgraphviz') || stop('package Rgraphviz is required')
+  # require('Rgraphviz') || stop('package Rgraphviz is required')
 
   if(!is.null(firstSigNodes)) 
     sigTerms <- sort(termsP.value)[1:firstSigNodes]

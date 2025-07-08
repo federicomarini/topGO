@@ -313,7 +313,7 @@ getPvalues <- function(edata, classlabel, test = "t",
                        correction = c("none", "Bonferroni", "Holm", "Hochberg",
                          "SidakSS", "SidakSD", "BH", "BY")[8]) {
 
-  require('multtest') || stop('package multtest is required')
+  # require('multtest') || stop('package multtest is required')
 
   ## restrict the dataset
   if(!is.null(genesID))
