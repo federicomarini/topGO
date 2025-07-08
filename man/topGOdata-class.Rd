@@ -171,12 +171,14 @@ hist(geneList, 100)
 ## how many differentially expressed genes are:
 sum(topDiffGenes(geneList))
 
+exp_desc <- 
+  "GO analysis of ALL data: Differential Expression between B-cell and T-cell"
 ## build the topGOdata class 
 GOdata <- new("topGOdata",
               ontology = "BP",
               allGenes = geneList,
               geneSel = topDiffGenes,
-              description = "GO analysis of ALL data: Differential Expression between B-cell and T-cell",
+              description = exp_desc,
               annot = annFUN.db,
               affyLib = affyLib)
 
