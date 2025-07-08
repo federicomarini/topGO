@@ -408,6 +408,7 @@ setMethod("scoresInTerm",
 setMethod("scoresInTerm",
           signature(object = "topGOdata", whichGO = "missing"),
           function(object, use.names = FALSE) {
+            # TODO: scoreInNode is not an existing function (now?)
             return(scoreInNode(object, nodes(graph(object)), use.names = use.names))
           })
 
@@ -950,7 +951,7 @@ setMethod("initialize", "classicExpr",
             }
             else {
               if(class(exprDat) != "matrix")
-                error("exprDat must be of type matrix")
+                stop("exprDat must be of type matrix")
 
               allMembers <- rownames(exprDat)
               e <- new.env(hash = TRUE, parent = emptyenv())
