@@ -10,6 +10,10 @@ importFrom("graphics", "legend", "par")
 importFrom("stats", "fisher.test", "ks.test", "pt", "t.test")
 importFrom("utils", "read.delim", "write.table")
 importFrom("DBI", "dbGetQuery")
+importFrom("Rgraphviz", "getDefaultAttrs", "agopen", "drawTxtLabel", 
+           "getNodeCenter", "getNodeLW", "getNodeXY", "getX", "getY", "name", 
+           "pieGlyph", "txtLabel", "AgNode", "toDot")
+importFrom("multtest", "mt.teststat", "mt.rawp2adjp")
 
 exportClasses(topGOdata, topGOresult, groupStats,
               classicCount, classicScore, classicExpr,
