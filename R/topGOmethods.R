@@ -950,7 +950,7 @@ setMethod("initialize", "classicExpr",
               e <- emptyenv()
             }
             else {
-              if(class(exprDat) != "matrix")
+              if(!is.matrix(exprDat))
                 stop("exprDat must be of type matrix")
 
               allMembers <- rownames(exprDat)
