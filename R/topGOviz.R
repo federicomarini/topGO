@@ -110,9 +110,9 @@ GOplot <- function(dag, sigNodes, dag.name = 'GO terms', edgeTypes = TRUE,
                    useFullNames = FALSE, oldSigNodes = NULL, nodeInfo = NULL) {
     
   if(!missing(sigNodes))
-    sigNodeInd = TRUE
+    sigNodeInd <- TRUE
   else
-    sigNodeInd = FALSE
+    sigNodeInd <- FALSE
   
   ## we set the global Graphviz attributes
   graphAttrs <- getDefaultAttrs(layoutType = 'dot')
@@ -265,9 +265,9 @@ GOplot.counts <- function(dag, wantedNodes, dag.name = 'GO terms',
     drawFun <- lapply(drawing,
                       function(x) {
                         if(.wn[x] == 1)
-                          col = c('red', 'lightblue')
+                          col <- c('red', 'lightblue')
                         else
-                          col = c('yellow', 'lightgreen')
+                          col <- c('yellow', 'lightgreen')
                         
                         buildDrawing(nodeCounts[, x], col)
                       })
@@ -399,9 +399,9 @@ showSigOfNodes <- function(GOdata, termsP.value, firstSigNodes = 10, reverse = T
     return(ret.val)
   }
 
-  .pval = pval.info(nodes(dag))
-  .def = .getTermsDefinition(whichTerms = nodes(dag), ontology(GOdata), numChar = .NO.CHAR)
-  .counts = apply(termCounts[, c("Significant", "Annotated")], 1, paste, collapse = " / ")
+  .pval <- pval.info(nodes(dag))
+  .def <- .getTermsDefinition(whichTerms = nodes(dag), ontology(GOdata), numChar = .NO.CHAR)
+  .counts <- apply(termCounts[, c("Significant", "Annotated")], 1, paste, collapse = " / ")
   ## more infos will be added
   nodeInfo <- switch(useInfo,
                      none = NULL,

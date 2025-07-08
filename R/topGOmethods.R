@@ -61,7 +61,7 @@ setMethod("initialize", "topGOdata",
             }
 
             ## size of the nodes which will be pruned
-            .Object@nodeSize = as.integer(max(nodeSize, 1))
+            .Object@nodeSize <- as.integer(max(nodeSize, 1))
 
             ## this function is returning a list of GO terms from the specified ontology
             ## whith each entry being a vector of genes
@@ -771,7 +771,7 @@ setMethod("initialize", "classicCount",
             .Object <- callNextMethod(.Object, testStatistic, name,
                                       allMembers, groupMembers)
             .Object@significant <- which(allMembers %in% sigMembers)
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -856,7 +856,7 @@ setMethod("initialize", "classicScore",
 
             .Object@score <- as.numeric(score)[index]
             .Object@scoreOrder <- scoreOrder
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -964,7 +964,7 @@ setMethod("initialize", "classicExpr",
 
             .Object@pType <- pType
             .Object@eData <- e
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -1019,7 +1019,7 @@ setMethod("initialize", "weight01Count",
                                       sigMembers)
 
             .Object@elim <- which(.Object@members %in% elim)
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -1082,7 +1082,7 @@ setMethod("initialize", "weight01Score",
                                       scoreOrder)
 
             .Object@elim <- which(.Object@members %in% elim)
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -1172,7 +1172,7 @@ setMethod("initialize", "weight01Expr",
                                       groupMembers, exprDat, pType)
 
             .Object@elim <- which(.Object@members %in% elim)
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -1236,7 +1236,7 @@ setMethod("initialize", "elimCount",
                                       allMembers, groupMembers,
                                       sigMembers, elim = elim)
             .Object@cutOff <- cutOff
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -1273,7 +1273,7 @@ setMethod("initialize", "elimScore",
                                       allMembers, groupMembers, score,
                                       scoreOrder, elim = elim)
             .Object@cutOff <- cutOff
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -1302,7 +1302,7 @@ setMethod("initialize", "elimExpr",
                                       groupMembers, exprDat, pType,
                                       elim = elim)
             .Object@cutOff <- cutOff
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -1361,7 +1361,7 @@ setMethod("initialize", "weightCount",
               .Object@penalise <- function(a, b) return(1)
 
             .Object@roundFun <- floor
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -1512,7 +1512,7 @@ setMethod("initialize", "parentChild",
             .Object@joinFun <- match.arg(joinFun)
             .Object@significant <- sigMembers
             .Object@splitIndex <- splitIndex
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -1632,7 +1632,7 @@ setMethod("initialize", "pC",
 
             .Object@joinFun <- joinFun
             .Object@significant <- sigMembers
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -1697,7 +1697,7 @@ setMethod("initialize", "leaCount",
                                       allMembers, groupMembers,
                                       sigMembers, elim = elim)
             .Object@depth <- as.integer(depth)
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -1734,7 +1734,7 @@ setMethod("initialize", "leaScore",
                                       allMembers, groupMembers, score,
                                       scoreOrder, elim = elim)
             .Object@depth <- as.integer(depth)
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
@@ -1763,7 +1763,7 @@ setMethod("initialize", "leaExpr",
                                       groupMembers, exprDat, pType,
                                       elim = elim)
             .Object@depth <- as.integer(depth)
-            .Object@testStatPar = list(...)
+            .Object@testStatPar <- list(...)
 
             .Object
           })
