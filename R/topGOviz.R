@@ -345,7 +345,7 @@ GOplot.counts <- function(dag, wantedNodes, dag.name = 'GO terms',
 ## swPlot    -- if true the graph is plotted, if not no plotting is done.
 ## useInfo   -- additional info to be ploted for a node
 showSigOfNodes <- function(GOdata, termsP.value, firstSigNodes = 10, reverse = TRUE,
-                            sigForAll = TRUE, wantedNodes = NULL, putWN = TRUE,
+                           sigForAll = TRUE, wantedNodes = NULL, putWN = TRUE,
                            putCL = 0, type = NULL, showEdges = TRUE, swPlot = TRUE,
                            useFullNames = TRUE, oldSigNodes = NULL,
                            useInfo = c('none', 'pval', 'counts', 'def', 'np', 'all')[1],
