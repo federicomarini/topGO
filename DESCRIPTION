@@ -25,15 +25,17 @@ Description:
 License: LGPL
 Encoding: UTF-8
 Depends: 
-  R (>= 2.10.0), 
+  R (>= 2.10.0),
+  GO.db (>= 2.3.0)
+Imports: 
   methods, 
   BiocGenerics (>= 0.13.6), 
   graph (>= 1.14.0),
   Biobase (>= 2.0.0), 
-  GO.db (>= 2.3.0), 
   AnnotationDbi (>= 1.7.19),
-  SparseM (>= 0.73)
-Imports: 
+  SparseM (>= 0.73),
+  grDevices, 
+  graphics,
   lattice, 
   matrixStats, 
   Rgraphviz,
