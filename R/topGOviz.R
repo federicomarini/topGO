@@ -342,7 +342,7 @@ GOplot.counts <- function(dag, wantedNodes, dag.name = 'GO terms',
 ##              children are added, if putCL = n we get the nodes form the
 ##              next n levels.
 ## type      -- used for plotting pie charts
-## swPlot    -- if true the graph is ploted, if not no plotting is done.
+## swPlot    -- if true the graph is plotted, if not no plotting is done.
 ## useInfo   -- additional info to be ploted for a node
 showSigOfNodes <- function(GOdata, termsP.value, firstSigNodes = 10, reverse = TRUE,
                             sigForAll = TRUE, wantedNodes = NULL, putWN = TRUE,
