@@ -92,7 +92,7 @@ setMethod("GOglobalTest", "classicExpr",
 
             # TODO: globaltest:::globaltest is a function that as of 2025 does not exist
             # TODO: clarify what the role for this should be/have been and adjust it?
-            return(globaltest::p.value(globaltest:::globaltest(X = membersExpr(object), Y = pType(object))))
+            return(globaltest::p.value(globaltest::gt(X = membersExpr(object), Y = pType(object))))
           })
 
 

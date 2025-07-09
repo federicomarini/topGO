@@ -38,13 +38,13 @@ Imports:
   matrixStats, 
   Rgraphviz,
   multtest,
+  globaltest,
   DBI 
 Suggests: 
   ALL,
   hgu95av2.db,
   hgu133a.db,
   genefilter,
-  globaltest,
   knitr,
   BiocStyle,
   rmarkdown

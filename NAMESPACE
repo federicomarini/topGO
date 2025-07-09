@@ -14,6 +14,7 @@ importFrom("Rgraphviz", "getDefaultAttrs", "agopen", "drawTxtLabel",
            "getNodeCenter", "getNodeLW", "getNodeXY", "getX", "getY", "name", 
            "pieGlyph", "txtLabel", "AgNode", "toDot")
 importFrom("multtest", "mt.teststat", "mt.rawp2adjp")
+importFrom("globaltest", "p.value", "gt")
 
 exportClasses(topGOdata, topGOresult, groupStats,
               classicCount, classicScore, classicExpr,
