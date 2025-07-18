@@ -9,7 +9,7 @@
 
 \title{Utility functions to work with Directed Acyclic Graphs (DAG)}
 
-\description{Basic functions to work witg DAGs}
+\description{Basic functions to work with DAGs}
 
 \usage{
 buildLevels(dag, root = NULL, leafs2root = TRUE)
@@ -22,8 +22,8 @@ reverseArch(dirGraph, useAlgo = "sparse", useWeights = TRUE)
 \arguments{
   \item{dag}{A \code{graphNEL} object.}
   
-  \item{root}{A character vector specifing the root(s) of the DAG. If
-    not specified the root node is autmatically computed.}
+  \item{root}{A character vector specifying the root(s) of the DAG. If
+    not specified the root node is automatically computed.}
 
   \item{leafs2root}{The leafs2root parameter tell if the graph has edges
     directed from the leaves to the root, or vice-versa}
@@ -32,13 +32,13 @@ reverseArch(dirGraph, useAlgo = "sparse", useWeights = TRUE)
   
   \item{dirGraph}{A \code{graphNEL} object containing a directed graph.}
   
-  \item{useAlgo}{A character string specifing one of the following options
-    \code{c("sparse", "normal")}. By default, \code{useAlgo = "sparse"}, a sparce matrix object is
+  \item{useAlgo}{A character string specifying one of the following options
+    \code{c("sparse", "normal")}. By default, \code{useAlgo = "sparse"}, a sparse matrix object is
     used to transpose the adjacency matrix. Otherwise a standard R
     martix is used.}
   
   \item{useWeights}{If weights should be used (if \code{useAlgo =
-      "normal"} then the weigths are used anyway)}
+      "normal"} then the weights are used anyway)}
 }
 
 
@@ -46,7 +46,7 @@ reverseArch(dirGraph, useAlgo = "sparse", useWeights = TRUE)
   \code{buildLevels} function determines the levels of a Directed
   Acyclic Graph (DAG). The level of a node is defined as the longest
   path from the node to the root. The function take constructs a named
-  list containg varios information about each nodes level. The root has
+  list containing various information about each nodes level. The root has
   level 1.
 
   \code{getNoOfLevels} - a convenient function to extract the number of

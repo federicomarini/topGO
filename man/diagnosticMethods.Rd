@@ -139,7 +139,7 @@ printGenes(object, whichTerms, file, ...)
 }
 
 \value{
-  A data.frame or a list of data.fames.
+  A data.frame or a list of data.frames.
 }
 
 \author{Adrian Alexa}
@@ -172,7 +172,9 @@ sig.tab <- GenTable(GOdata, resultFisher, resultKS, topNodes = 20)
 sig.tab <- GenTable(GOdata, Fis = resultFisher, KS = resultKS, topNodes = 20)
 
 ## results of both test with specified names and specified ordering
-sig.tab <- GenTable(GOdata, Fis = resultFisher, KS = resultKS, orderBy = "KS", ranksOf = "Fis", topNodes = 20)
+sig.tab <- GenTable(GOdata, Fis = resultFisher, 
+                    KS = resultKS, orderBy = "KS", 
+                    ranksOf = "Fis", topNodes = 20)
 
 
 ########################################

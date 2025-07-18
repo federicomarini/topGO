@@ -789,8 +789,8 @@ setMethod("getSigGroups",
 
 
   setGeneWeights <- function(termID, geneWeights, LookUP.table) {
-    oldWeigths <- get(termID, envir = LookUP.table)
-    assign(termID, x.comb.y(geneWeights, oldWeigths), envir = LookUP.table)
+    oldWeights <- get(termID, envir = LookUP.table)
+    assign(termID, x.comb.y(geneWeights, oldWeights), envir = LookUP.table)
   }
 
   
@@ -845,8 +845,8 @@ setMethod("getSigGroups",
         else {
           ## if for child exists some genes that are weighted
           ## they are 'combine' using "pmin" function
-          oldWeigths <- get(child, envir = downNodes.LookUP)
-          gCW <- x.comb.y(gene.childWeights, oldWeigths, combFun = pmin)
+          oldWeights <- get(child, envir = downNodes.LookUP)
+          gCW <- x.comb.y(gene.childWeights, oldWeights, combFun = pmin)
         }
 
         assign(child, gCW, envir = downNodes.LookUP)

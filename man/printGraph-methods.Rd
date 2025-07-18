@@ -19,7 +19,8 @@
 showSigOfNodes(GOdata, termsP.value, firstSigNodes = 10, reverse = TRUE,
                sigForAll = TRUE, wantedNodes = NULL, putWN = TRUE,
                putCL = 0, type = NULL, showEdges = TRUE,  swPlot = TRUE,
-               useFullNames = TRUE, oldSigNodes = NULL, useInfo = c("none", "pval", "counts", "def", "np", "all")[1],
+               useFullNames = TRUE, oldSigNodes = NULL, 
+               useInfo = c("none", "pval", "counts", "def", "np", "all")[1],
                plotFunction = GOplot, .NO.CHAR = 20)
 
 printGraph(object, result, firstSigNodes, refResult, ...) 
@@ -46,11 +47,11 @@ printGraph(object, result, firstSigNodes, refResult, ...)
     parameters, plus their children. if putCL = 1 than only the 
     children are added, if putCL = n we get the nodes form the
     next n levels.}
-  \item{type}{used for ploting pie charts}
+  \item{type}{used for plotting pie charts}
   \item{showEdges}{if \code{TRUE} the edge are shown}
-  \item{swPlot}{if true the graph is ploted, if not no ploting is done.}
-  \item{useInfo}{aditional info to be ploted to each node.}
-  \item{oldSigNodes}{used to plot the (new) sigNodes in the same collor
+  \item{swPlot}{if true the graph is ploted, if not no plotting is done.}
+  \item{useInfo}{additional info to be ploted to each node.}
+  \item{oldSigNodes}{used to plot the (new) sigNodes in the same color
     range as the old ones}
   \item{useFullNames}{argument for internal use ..}
   \item{plotFunction}{argument for internal use ..}
@@ -100,7 +101,8 @@ data(GOdata)
 data(results.tGO)
 
 showSigOfNodes(GOdata, score(resultFisher), firstSigNodes = 5, useInfo = 'all')
-printGraph(GOdata, resultFisher, firstSigNodes = 5, fn.prefix = "sampleFile", useInfo = "all", pdfSW = TRUE)
+printGraph(GOdata, resultFisher, firstSigNodes = 5, 
+           fn.prefix = "sampleFile", useInfo = "all", pdfSW = TRUE)
 }
 
 }

@@ -6,7 +6,7 @@
 ##    dirGraph   --  the graph to be transormed
 ##    useAlgo    --  'sparse' or 'normal'
 ##    useWeights --  if weights should be used (if useAlgo = 'normal' that
-##                   the weigths are used anyway)                
+##                   the weights are used anyway)                
 
 reverseArch <- function(dirGraph,
                         useAlgo = 'sparse',

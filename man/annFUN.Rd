@@ -42,7 +42,7 @@ inverseList(l)
     genes filtered.}
 
   \item{affyLib}{character string containing the name of the
-    Bioconductor annotaion package for a specific microarray chip.}
+    Bioconductor annotation package for a specific microarray chip.}
 
   \item{gene2GO}{named list of character vectors. The list names are
     genes identifiers. For each gene the character vector contains the
@@ -53,16 +53,16 @@ inverseList(l)
     genes identifiers which are mapped to it. Only the most specific
     annotations are required.}
   
-  \item{mapping}{character string specifieng the name of the
+  \item{mapping}{character string specifying the name of the
     Bioconductor package containing the gene mappings for a
     specific organism. For example: \code{mapping = "org.Hs.eg.db"}.}
   
-  \item{ID}{character string specifing the gene identifier to
+  \item{ID}{character string specifying the gene identifier to
     use. Currently only the following identifiers can be used:
     \code{c("entrez", "genbank", "alias", "ensembl", "symbol",
       "genename", "unigene")}}
   
-  \item{file}{character string specifing the file containing the annotations.}
+  \item{file}{character string specifying the file containing the annotations.}
 
   \item{...}{other parameters}
 

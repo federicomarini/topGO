@@ -16,7 +16,7 @@
 
 \title{Class "classicExpr"}
 \description{This class that extends the virtual class "groupStats" by adding 
-  two slots for accomodating gene expression data.}
+  two slots for accommodating gene expression data.}
 
 \section{Objects from the Class}{
   Objects can be created by calls of the form \code{new("classicExpr", testStatistic, name, groupMembers, exprDat, pType, ...)}.
