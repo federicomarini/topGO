@@ -3,4 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   topGO_manual: topGO_manual.html
-last_built: 2025-07-18T13:44Z
+last_built: 2025-07-18T15:47Z
+urls:
+  reference: https://federicomarini.github.io/topGO/reference
+  article: https://federicomarini.github.io/topGO/articles
