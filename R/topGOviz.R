@@ -25,10 +25,10 @@ showGroupDensity <- function(object, whichGO, ranks = FALSE, rm.one = TRUE) {
 
 
 .ps2eps <- function(filename) {
-  system(paste('ps2epsi', paste(filename, ".ps", sep=""), sep = ' '), T, F)
+  system(paste('ps2epsi', paste(filename, ".ps", sep=""), sep = ' '), TRUE, FALSE)
   system(paste('epstool --copy --bbox', paste(filename, ".epsi", sep=""),
-               paste(filename, ".eps", sep=""), sep = ' '), T, F)
-  system(paste('rm -f', paste(filename, ".ps", sep=""), paste(filename, ".epsi", sep=""), sep = ' '), T, T)
+               paste(filename, ".eps", sep=""), sep = ' '), TRUE, FALSE)
+  system(paste('rm -f', paste(filename, ".ps", sep=""), paste(filename, ".epsi", sep=""), sep = ' '), TRUE, TRUE)
 }
 
 
@@ -104,15 +104,15 @@ setMethod("printGraph",
 ## oldSigNodes:  used to plot the (new) sigNodes in the same color range
 ##               as the old ones
 ## export.to.dot.file: is a global variable given the name of the output .dot file
-GOplot <- function(dag, sigNodes, dag.name = 'GO terms', edgeTypes = T,
+GOplot <- function(dag, sigNodes, dag.name = 'GO terms', edgeTypes = TRUE,
                    nodeShape.type = c('box', 'circle', 'ellipse', 'plaintext')[3],
-                   genNodes = NULL, wantedNodes = NULL, showEdges = T, useFullNames = F,
-                   oldSigNodes = NULL, nodeInfo = NULL) {
+                   genNodes = NULL, wantedNodes = NULL, showEdges = TRUE, 
+                   useFullNames = FALSE, oldSigNodes = NULL, nodeInfo = NULL) {
     
   if(!missing(sigNodes))
-    sigNodeInd = TRUE
+    sigNodeInd <- TRUE
   else
-    sigNodeInd = FALSE
+    sigNodeInd <- FALSE
   
   ## we set the global Graphviz attributes
   graphAttrs <- getDefaultAttrs(layoutType = 'dot')
@@ -235,7 +235,7 @@ GOplot <- function(dag, sigNodes, dag.name = 'GO terms', edgeTypes = T,
 ##              a different color. The vector contains the names pf the nodes
 
 GOplot.counts <- function(dag, wantedNodes, dag.name = 'GO terms',
-                          edgeTypes = T, nodeCounts, showEdges = T) {
+                          edgeTypes = TRUE, nodeCounts, showEdges = TRUE) {
   
   if(missing(wantedNodes))
     stop('please give the nodes that you are intrested in')
@@ -265,9 +265,9 @@ GOplot.counts <- function(dag, wantedNodes, dag.name = 'GO terms',
     drawFun <- lapply(drawing,
                       function(x) {
                         if(.wn[x] == 1)
-                          col = c('red', 'lightblue')
+                          col <- c('red', 'lightblue')
                         else
-                          col = c('yellow', 'lightgreen')
+                          col <- c('yellow', 'lightgreen')
                         
                         buildDrawing(nodeCounts[, x], col)
                       })
@@ -275,7 +275,7 @@ GOplot.counts <- function(dag, wantedNodes, dag.name = 'GO terms',
     plot(curPlot, drawNode = drawFun)
     
     ## get the DAG root coordinates
-    dagRoot <- getGraphRoot(dag, leafs2root = F)
+    dagRoot <- getGraphRoot(dag, leafs2root = FALSE)
     parentEnv <- environment()
     rootCenter <- NULL
     lapply(AgNode(curPlot),
@@ -342,16 +342,16 @@ GOplot.counts <- function(dag, wantedNodes, dag.name = 'GO terms',
 ##              children are added, if putCL = n we get the nodes form the
 ##              next n levels.
 ## type      -- used for plotting pie charts
-## swPlot    -- if true the graph is ploted, if not no plotting is done.
+## swPlot    -- if true the graph is plotted, if not no plotting is done.
 ## useInfo   -- additional info to be ploted for a node
 showSigOfNodes <- function(GOdata, termsP.value, firstSigNodes = 10, reverse = TRUE,
-                            sigForAll = TRUE, wantedNodes = NULL, putWN = TRUE,
+                           sigForAll = TRUE, wantedNodes = NULL, putWN = TRUE,
                            putCL = 0, type = NULL, showEdges = TRUE, swPlot = TRUE,
                            useFullNames = TRUE, oldSigNodes = NULL,
                            useInfo = c('none', 'pval', 'counts', 'def', 'np', 'all')[1],
                            plotFunction = GOplot, .NO.CHAR = 20) {
 
-  require('Rgraphviz') || stop('package Rgraphviz is required')
+  # require('Rgraphviz') || stop('package Rgraphviz is required')
 
   if(!is.null(firstSigNodes)) 
     sigTerms <- sort(termsP.value)[1:firstSigNodes]
@@ -399,9 +399,9 @@ showSigOfNodes <- function(GOdata, termsP.value, firstSigNodes = 10, reverse = T
     return(ret.val)
   }
 
-  .pval = pval.info(nodes(dag))
-  .def = .getTermsDefinition(whichTerms = nodes(dag), ontology(GOdata), numChar = .NO.CHAR)
-  .counts = apply(termCounts[, c("Significant", "Annotated")], 1, paste, collapse = " / ")
+  .pval <- pval.info(nodes(dag))
+  .def <- .getTermsDefinition(whichTerms = nodes(dag), ontology(GOdata), numChar = .NO.CHAR)
+  .counts <- apply(termCounts[, c("Significant", "Annotated")], 1, paste, collapse = " / ")
   ## more infos will be added
   nodeInfo <- switch(useInfo,
                      none = NULL,
@@ -464,7 +464,7 @@ showSigOfNodes <- function(GOdata, termsP.value, firstSigNodes = 10, reverse = T
 
 ## this function is compiling a .dot file from the dag
 printDOT <- function(dag, sigNodes = NULL, genNodes = NULL, wantedNodes = NULL,
-                     showEdges = T, useFullNames = F, oldSigNodes = NULL,
+                     showEdges = TRUE, useFullNames = FALSE, oldSigNodes = NULL,
                      nodeInfo = NULL, export.to.dot.file = "MyGraph.dot") {
   
   ## we set the global Graphviz attributes

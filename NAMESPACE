@@ -1,15 +1,29 @@
-import(methods, BiocGenerics, Biobase, AnnotationDbi, graph, GO.db)
+importFrom("methods", "representation", "setClass", "findMethodSignatures", "as",
+           "isClass", "isGeneric", "new", "setGeneric", "setMethod", "signature",
+           "callNextMethod") 
+importFrom("AnnotationDbi", "get", "mget", "eapply", "revmap")
+importFrom("Biobase", "multiassign", "listLen", "description", "description<-")
 
-importFrom(SparseM, t)
-
-importFrom(lattice, densityplot, xyplot)
-importFrom("matrixStats", "rowMins", "rowMaxs")
-
+importFrom("BiocGenerics", "score", "score<-")
+importFrom("graph","adj", "nodes", "subGraph", "edgemode", "nodeData", 
+          "nodeDataDefaults", "edges", "graph2SparseM", "numEdges",
+          "sparseM2Graph", "numNodes", "edgeWeights", "nodeDataDefaults<-",
+          "nodeData<-", "plot")
+importFrom("GO.db", "GO_dbconn")
 importFrom("grDevices", "dev.off", "heat.colors", "pdf", "postscript")
 importFrom("graphics", "legend", "par")
+importFrom("lattice", "densityplot", "xyplot")
+importFrom("matrixStats", "rowMins", "rowMaxs", "rowMedians")
 importFrom("stats", "fisher.test", "ks.test", "pt", "t.test")
 importFrom("utils", "read.delim", "write.table")
 importFrom("DBI", "dbGetQuery")
+importFrom("Rgraphviz", "getDefaultAttrs", "agopen", "drawTxtLabel", 
+           "getNodeCenter", "getNodeLW", "getNodeXY", "getX", "getY", "name", 
+           "pieGlyph", "txtLabel", "AgNode", "toDot")
+importFrom("SparseM", "t")
+
+importFrom("multtest", "mt.teststat", "mt.rawp2adjp")
+importFrom("globaltest", "p.value", "gt")
 
 exportClasses(topGOdata, topGOresult, groupStats,
               classicCount, classicScore, classicExpr,

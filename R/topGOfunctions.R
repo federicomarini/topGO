@@ -20,7 +20,7 @@ groupGOTerms <- function(where) {
   sql <- "SELECT go_id FROM go_term WHERE ontology IN"
   for(onto in c("BP", "MF", "CC")) {
     xx <- dbGetQuery(GO_dbconn(), paste(sql, "('", onto, "');", sep = ""))$go_id
-    e <- new.env(hash = T, parent = emptyenv())
+    e <- new.env(hash = TRUE, parent = emptyenv())
     multiassign(xx, value = rep(TRUE, length(xx)), envir = e)
     assign(paste("GO", onto, "Term", sep = ""), e, envir = where)
   }
@@ -313,7 +313,7 @@ getPvalues <- function(edata, classlabel, test = "t",
                        correction = c("none", "Bonferroni", "Holm", "Hochberg",
                          "SidakSS", "SidakSD", "BH", "BY")[8]) {
 
-  require('multtest') || stop('package multtest is required')
+  # require('multtest') || stop('package multtest is required')
 
   ## restrict the dataset
   if(!is.null(genesID))

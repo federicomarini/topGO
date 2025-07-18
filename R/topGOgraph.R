@@ -53,7 +53,7 @@ getGraphRoot <- function(dag,
 buildGOgraph.topology <- function(knownNodes, whichOnto = "BP") {
 
   ## first build the lookUp table for the GO terms
-  nodeLookUp <- new.env(hash = T, parent = emptyenv())
+  nodeLookUp <- new.env(hash = TRUE, parent = emptyenv())
   GOOTerm <- get(paste('GO', whichOnto, 'Term', sep = ''), mode = 'environment')
 
   ## warping functions for a easier acces to the lookUp table
@@ -75,7 +75,7 @@ buildGOgraph.topology <- function(knownNodes, whichOnto = "BP") {
   
   ## we use an environment of environments to store edges: (this way is faster)
   ## in the end we will coerce it to a list of list and build a graphNEL obj. 
-  edgeEnv <- new.env(hash = T, parent = emptyenv())
+  edgeEnv <- new.env(hash = TRUE, parent = emptyenv())
   
   ## add the arc (u --> v) to edgeEnv of type :
   ##    0 for a is_a relation
@@ -92,7 +92,7 @@ buildGOgraph.topology <- function(knownNodes, whichOnto = "BP") {
     
     ## we put the node in the graph and we get his parents
     setNodeInDAG(node)    # we visit the node
-    assign(node, new.env(hash = T, parent = emptyenv()), envir = edgeEnv) # adj list
+    assign(node, new.env(hash = TRUE, parent = emptyenv()), envir = edgeEnv) # adj list
   
     if(node == GENE.ONTO.ROOT) 
       return(2)
@@ -155,7 +155,7 @@ nodesInInducedGraph <- function(dag,
                                  startNodes) {
   
   ## build a lookUp table with the nodes in the graph
-  nodeLookUp <- new.env(hash = T, parent = emptyenv())
+  nodeLookUp <- new.env(hash = TRUE, parent = emptyenv())
   
   nodesDAG <- dag@nodes
 
@@ -190,7 +190,7 @@ nodesInInducedGraph2 <- function(dag,
                                 startNodes) {
   
   ## build a lookUp table with the nodes in the graph
-  nodeLookUp <- new.env(hash = T, parent = emptyenv())
+  nodeLookUp <- new.env(hash = TRUE, parent = emptyenv())
 
   edgesDAG <- edges(dag)
 
@@ -256,7 +256,7 @@ buildLevels <- function(dag,
   if(leafs2root == TRUE)
     dag <- reverseArch(dag)
     
-  nodes2level <- new.env(hash = T, parent = emptyenv())
+  nodes2level <- new.env(hash = TRUE, parent = emptyenv())
 
   queue <- as.character(root)
   level <- 1

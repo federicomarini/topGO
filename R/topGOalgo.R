@@ -691,14 +691,14 @@ setMethod("getSigGroups",
   #message("\n\t\t Parameters:\t cutOff = ", adjs.cutOff)
   
   ## we use a lookup table to search for nodes that have were significant
-  sigNodes.LookUP <- new.env(hash = T, parent = emptyenv())
+  sigNodes.LookUP <- new.env(hash = TRUE, parent = emptyenv())
 
   ## hash table for the genes that we eliminate for each node
   ## we store the genes that we want to eliminate
-  elimGenes.LookUP <- new.env(hash = T, parent = emptyenv())
+  elimGenes.LookUP <- new.env(hash = TRUE, parent = emptyenv())
   
   ## hash table to store the result
-  sigList <- new.env(hash = T, parent = emptyenv())
+  sigList <- new.env(hash = TRUE, parent = emptyenv())
 
 
   for(i in nodeLevel$noOfLevels:1) {
@@ -900,11 +900,11 @@ setMethod("getSigGroups",
                   names(gw) <- x
                   return(gw)
                 })
-  upNodes.LookUP <- list2env(aux, new.env(hash = T, parent = emptyenv()))
-  downNodes.LookUP <-  new.env(hash = T, parent = emptyenv())
+  upNodes.LookUP <- list2env(aux, new.env(hash = TRUE, parent = emptyenv()))
+  downNodes.LookUP <-  new.env(hash = TRUE, parent = emptyenv())
 
   ## we also use a hash table to store the result
-  sigList <- new.env(hash = T, parent = emptyenv())
+  sigList <- new.env(hash = TRUE, parent = emptyenv())
   
   ## we will use frequently the children
   allChildren <- adj(goDAG.r2l, nodes(goDAG))
@@ -1042,10 +1042,10 @@ setMethod("getSigGroups",
 
   ## hash table for the genes that we eliminate for each node
   ## we store the genes that we want to eliminate
-  upNodes.LookUP <- new.env(hash = T, parent = emptyenv())
+  upNodes.LookUP <- new.env(hash = TRUE, parent = emptyenv())
 
   ## we also use a hash table to store the result
-  sigList <- new.env(hash = T, parent = emptyenv())
+  sigList <- new.env(hash = TRUE, parent = emptyenv())
   
   ## we will use frequently the children
   allChildren <- adj(goDAG.r2l, nodes(goDAG))
@@ -1094,7 +1094,7 @@ setMethod("getSigGroups",
   levelsLookUp <- nodeLevel$level2nodes
   
   ## hash table to store the result
-  sigList <- new.env(hash = T, parent = emptyenv())
+  sigList <- new.env(hash = TRUE, parent = emptyenv())
 
   ## we don't score the root node 
   for(i in nodeLevel$noOfLevels:2) {

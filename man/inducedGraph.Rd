@@ -35,6 +35,8 @@ nodesInInducedGraph(dag, startNodes)
 \examples{
 data(GOdata)
 
+library(graph)
+
 ## the GO graph
 g <- graph(GOdata)
 g
