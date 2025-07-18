@@ -97,11 +97,11 @@ section as well as showing more advance functionality implemented in the `topGO`
 # Installation
 
 This section briefly describe the necessary to get `topGO` running on your system. 
-We assume that the user have the R program (see the R project at http://www.r-project.org) already
+We assume that the user have the R program (see the R project at [https://www.r-project.org](https://www.r-project.org)) already
 installed and its familiar with it. You will need to have R 2.10.0 or later to be able to install and
 run `topGO`.
 
-The `topGO` package is available from the Bioconductor repository at https://www.bioconductor.org.
+The `topGO` package is available from the Bioconductor repository at [https://www.bioconductor.org](https://www.bioconductor.org).
 To be able to install the package one needs first to install the core Bioconductor packages. 
 If you have already installed Bioconductor packages on your system then you can skip the two lines 
 below.
